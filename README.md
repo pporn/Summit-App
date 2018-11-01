@@ -1,6 +1,7 @@
 ## Firebase Functions for Summit App
 
 To deploy functions to FireBase, run `firebase deploy --only functions`
+
 To test functions before deployment, run `firebase serve`
 
 ### `\user`
