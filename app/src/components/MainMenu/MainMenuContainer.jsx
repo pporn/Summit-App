@@ -16,11 +16,14 @@ class MainMenu extends Component {
                     <Link to='/Login'>
                         <Button bsStyle="primary">Login</Button>
                     </Link>
-                  <Link to='/NewClientFormRedirect'>
+                    <Link to='/ClientRegistration'>
                         <Button bsStyle="primary">New User</Button>
                     </Link>
                     <Link to='/EmployeePage'>
                         <Button bsStyle="primary">Employee Page</Button>
+                    </Link>
+                    <Link to='/MedicalQuestionnaire'>
+                        <Button bsStyle="primary">Medical Questionnaire</Button>
                     </Link>
                 </ButtonToolbar>
             </div>
