@@ -33,7 +33,7 @@ const Header = () => (
 class App extends Component {
   render() {
     return (
-      <div>
+      <div id="Main-Container">
         <Header />
         <Switch>
           <Route exact path='/' component={MainMenu}/>

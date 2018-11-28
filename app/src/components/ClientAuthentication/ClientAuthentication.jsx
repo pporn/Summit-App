@@ -68,7 +68,7 @@ class ClientAuthentication extends Component {
                 <ClientListTypeahead clientList={this.state.clients} onSelect={this.handleClientSelection}/>
                 {
                     this.state.hasSelected
-                        ? <DOB onValidDOB={this.handleClientDOB}/>
+                        ? <DOB defaultDate={"2000-01-01"} onValidDOB={this.handleClientDOB}/>
                         : null
                 }
                 {
