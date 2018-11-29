@@ -13,20 +13,22 @@ class DobInput extends Component {
 
     onChange(e) {
         // If you don't want date validation change a prop
-        if(this.props.validation === null) {
+        var target = e.target.value;
+        if(this.props.validation === undefined) {
             let currDate = new Date();
-            let newDate = e.target.value.split("-");
+            let newDate = target.split("-");
             let newYear = parseInt(newDate[0]), newMonth = parseInt(newDate[1]), newDay = parseInt(newDate[2]);
-            let maxYear = parseInt(currDate.getFullYear()), maxMonth = parseInt(currDate.getMonth()) + 1, maxDay = currDate.getDate();
+            let maxYear = parseInt(currDate.getFullYear()), maxMonth = parseInt(currDate.getMonth()) + 1, maxDay = 31;
             if(newYear > maxYear)
-                return;
+                target = "2000-01-01";
+            console.log(newDay);
             if(newYear <= maxYear && newMonth > maxMonth)
-                return;
+                target = "2000-01-01";
             if(newYear <= maxYear && newMonth <= maxMonth && newDay > maxDay)
-                return;
+                target = "2000-01-01";
         }
-        this.setState({ currSelected: e.target.value })
-        this.props.onValidDOB(e.target.value);
+        this.setState({ currSelected: target })
+        this.props.onValidDOB(target);
     }
 
     render() {
