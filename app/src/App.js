@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link } from "react-router-dom";
-import { Button, Navbar, Nav, NavItem } from "react-bootstrap";
+import { Route, Switch } from "react-router-dom";
 
 import './App.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
@@ -16,31 +15,14 @@ import MedicalQuestionnaire from './components/MedicalQuestionnaire/MedicalQuest
 import EmployeePage from './components/EmployeePage/EmployeePageContainer.jsx';
 import AlertManagement from './components/AlertManagement/AlertManagementContainer.jsx';
 import CreateAlert from './components/CreateAlert/CreateAlertContainer.jsx';
-
-const Header = () => (
-  <div>
-    <span>
-      <Link to='/Home'>
-        <Button bsStyle="primary">
-            Home
-        </Button>
-      </Link>
-    </span>
-    <span id="Employee-Login-Button">
-      <Link to='/EmployeePage'>
-        <Button bsStyle="primary">Employee Login</Button>
-      </Link>
-    </span>
-    <hr/>
-  </div>
-)
+import NavBar from './components/Shared/NavBar.jsx';
 
 class App extends Component {
   render() {
     return (
       <div id="Main-Container">
-        <Header />
-        <Switch onChange={() => {alert("hi")}}>
+        <NavBar currState={this.state}/>
+        <Switch>
           <Route exact path='/' component={MainMenu}/>
           <Route exact path='/Home' component={MainMenu}/>
           <Route path='/GymInformation' component={GymInformation}/>
