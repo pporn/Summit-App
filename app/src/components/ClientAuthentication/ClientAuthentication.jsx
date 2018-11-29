@@ -61,28 +61,37 @@ class ClientAuthentication extends Component {
 
     render() {
         return(
-            <div>
-                {this.state.clients != null &&
-                    <h2>Enter Your Name:</h2>
-                }
-                <ClientListTypeahead clientList={this.state.clients} onSelect={this.handleClientSelection}/>
-                {
-                    this.state.hasSelected
-                        ? <DOB onValidDOB={this.handleClientDOB}/>
-                        : null
-                }
-                {
-                    this.state.dobCompleted
-                        ?
-                        <Button 
-                            bsStyle="primary" 
-                            disabled={!this.state.hasSelected} 
-                            onClick={this.onSubmit}>
-                            Check In
-                        </Button>
-                        : null
-                }
-
+            <div id="Centralized-In-Page">
+                <div id="Centralized-In-Block" className="Authenticatin-Div">
+                <center>
+                    {this.state.clients != null &&
+                        <h2>Enter Your Name:</h2>
+                    }
+                    <ClientListTypeahead 
+                        clientList={this.state.clients} 
+                        onSelect={this.handleClientSelection}
+                    />
+                    {
+                        this.state.hasSelected
+                            ?   <div id="Top-Padding">
+                                    <DOB defaultDate={"2000-01-01"} onValidDOB={this.handleClientDOB}/>
+                                </div>
+                            : null
+                    }
+                    {
+                        this.state.dobCompleted
+                            ?   <div id="Top-Padding">
+                                    <Button 
+                                        bsStyle="primary" 
+                                        disabled={!this.state.hasSelected} 
+                                        onClick={this.onSubmit}>
+                                        Submit
+                                    </Button>
+                                </div>
+                            : null
+                    }
+                </center>
+                </div>
             </div>
         )
     }

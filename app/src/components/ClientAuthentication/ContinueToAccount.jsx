@@ -8,20 +8,26 @@ class ContinueToAccount extends Component {
             return(
                 this.props.showQuestion
                     ?   <div>
-                            <h3>Hi {this.props.name}! Would you like to continue to your account?</h3>
-                            <ButtonToolbar>
-                                <Link to={{
-                                    pathname: '/ClientAccount',
-                                    state: {
-                                        userId: userId,
-                                    },
-                                }}>
-                                    <Button bsStyle="primary">Yes</Button>
-                                </Link>
-                                <Link to='/Home'>
-                                    <Button bsStyle="primary">No</Button>
-                                </Link>
-                            </ButtonToolbar>
+                            <center><h3>Hi {this.props.name}! Would you like to continue to your account?</h3></center>
+                            <div id="Centralized-In-Page">
+                                <ButtonToolbar className="btn-group-vertical">
+                                    <span id="Centralized-In-Block">
+                                        <Link to={{
+                                                pathname: '/ClientAccount',
+                                                state: {
+                                                    userId: userId,
+                                                },
+                                            }}>
+                                            <Button bsStyle="primary">Yes</Button>
+                                        </Link>
+                                    </span>
+                                    <span id="Centralized-In-Block">
+                                        <Link to='/Home'>
+                                            <Button bsStyle="primary">No</Button>
+                                        </Link>
+                                    </span>
+                                </ButtonToolbar>
+                            </div>
                         </div>
                     : null
 
