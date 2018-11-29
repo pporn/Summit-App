@@ -35,3 +35,19 @@
   padding:2%;
 }
 
+#Employee-Login-Button {
+  float: right;
+}
+
+#Main-Toolbar {
+  padding-top: 5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#Main-Menu-Button {
+  margin: 0 auto;
+  padding-bottom: 15%;
+}
