@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 class MainMenu extends Component {
     render() {
         return(
-            <div id="Main-Toolbar">
+            <div id="Centralized-In-Page">
                 <ButtonToolbar>
                     <ButtonGroup className="btn-group-vertical">
-                        <Link to='/CheckIn' id="Main-Menu-Button">
+                        <Link to='/CheckIn' id="Centralized-In-Block">
                             <Button bsSize="large" bsStyle="primary">Check In</Button>
                         </Link>
-                        <Link to='/Login' id="Main-Menu-Button">
+                        <Link to='/Login' id="Centralized-In-Block">
                             <Button bsSize="large" bsStyle="primary">Login</Button>
                         </Link>
-                        <Link to='/ClientRegistration' id="Main-Menu-Button">
+                        <Link to='/ClientRegistration' id="Centralized-In-Block">
                             <Button bsSize="large" bsStyle="primary">New User</Button>
                         </Link>
                     </ButtonGroup>

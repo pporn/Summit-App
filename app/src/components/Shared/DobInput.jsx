@@ -21,7 +21,6 @@ class DobInput extends Component {
             let maxYear = parseInt(currDate.getFullYear()), maxMonth = parseInt(currDate.getMonth()) + 1, maxDay = 31;
             if(newYear > maxYear)
                 target = "2000-01-01";
-            console.log(newDay);
             if(newYear === maxYear && newMonth > maxMonth)
                 target = "2000-01-01";
             if(newYear === maxYear && newMonth === maxMonth && newDay > maxDay)
