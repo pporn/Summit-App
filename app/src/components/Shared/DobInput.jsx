@@ -14,7 +14,7 @@ class DobInput extends Component {
     onChange(e) {
         // If you don't want date validation change a prop
         var target = e.target.value;
-        if(this.props.validation === undefined) {
+        if(this.props.validation === undefined || this.props.validation === true) {
             let currDate = new Date();
             let newDate = target.split("-");
             let newYear = parseInt(newDate[0]), newMonth = parseInt(newDate[1]), newDay = parseInt(newDate[2]);
