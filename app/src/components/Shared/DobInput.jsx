@@ -22,9 +22,9 @@ class DobInput extends Component {
             if(newYear > maxYear)
                 target = "2000-01-01";
             console.log(newDay);
-            if(newYear <= maxYear && newMonth > maxMonth)
+            if(newYear === maxYear && newMonth > maxMonth)
                 target = "2000-01-01";
-            if(newYear <= maxYear && newMonth <= maxMonth && newDay > maxDay)
+            if(newYear === maxYear && newMonth === maxMonth && newDay > maxDay)
                 target = "2000-01-01";
         }
         this.setState({ currSelected: target })
