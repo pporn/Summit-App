@@ -12,20 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-#Client_Registration{
-
-}
-
-#NewUserFirst{
-  margin-top: 1%;
-  margin-bottom: 4%;
-}
-
-#NewUserDOB{
-  margin-bottom: 4%;
-}
-
-#NewUserLast{
-  margin-bottom: 4%;
-}
