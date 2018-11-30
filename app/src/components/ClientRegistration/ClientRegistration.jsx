@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import addClients from './ClientRegistrationVirtualController';
 import { Button }  from 'react-bootstrap';
-import { printDate, verifyName } from '../Shared/Utils.js'
+import { verifyName } from '../Shared/Utils.js'
 import DOB from '../Shared/DobInput.jsx';
 import { Router, Route, Link } from 'react-router-dom';
 
