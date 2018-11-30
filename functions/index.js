@@ -177,8 +177,15 @@ exports.getUserId = functions.https.onRequest((req, res) => {
 exports.getUserInfo = functions.https.onRequest((req, res) => {
   const userId = req.query.user_id;
 
+  // Prevent injection
+  if(userId === '/') {
+    return cors(req, res, () => {
+      res.status(422).send({'message': 'User id not found'});
+    });
+  }
+
   const getUserInfo = admin.database().ref('user').child(userId);
-  getUserInfo.once('value')
+  return getUserInfo.once('value')
     .then(snapshot => {
       // check whether user id exits
       if(!snapshot.exists()) {
@@ -196,6 +203,7 @@ exports.getUserInfo = functions.https.onRequest((req, res) => {
         res.status(422).send({'message': 'Fail to get user info'});
       });
     });
+
 });
 
 // fetch all user names from database
@@ -256,7 +264,7 @@ exports.setGeneralMedInfo = functions.https.onRequest((req, res) => {
 
       // set general info
       var updates = {};
-      updates['mdeical_info/general'] = val;
+      updates['medical_info/general'] = val;
       userRoot.update(updates);
 
       // promise always needs to return something
@@ -304,7 +312,7 @@ exports.setMedInfo = functions.https.onRequest((req, res) => {
 
       // set general info
       var updates = {};
-      updates['mdeical_info/medical'] = val;
+      updates['medical_info/medical'] = val;
       userRoot.update(updates);
 
       // promise always needs to return something
@@ -320,5 +328,40 @@ exports.setMedInfo = functions.https.onRequest((req, res) => {
     return cors(req, res, () => {
       res.status(200).send('{message: ok}');
     });
+});
+
+// ============ Alert Functions ===============
+
+/**************************/
+/*      createAlert       */
+/**************************/
+exports.createAlert = functions.https.onRequest((req, res) => {
+   // return if method is not post
+  if(req.method !== 'POST') {
+    return cors(req, res, () => {
+      res.status(422).send({'message': 'Not POST'});
+    });
+  }
+
+  // get user id and val
+  const name = req.body.name;
+  const dates_effective = req.body.dates_effective;
+  const description= req.body.description;
+  const ttl = req.body.ttl;
+
+  const alertRoot = admin.database().ref('alert');
+  const alertId = alertRoot.push().key;
+
+  var updates = {};
+  updates[alertId + '/name'] = name;
+  updates[alertId + '/dates_effective'] = dates_effective;
+  updates[alertId + '/description'] = description;
+  updates[alertId + '/ttl'] = ttl;
+
+  alertRoot.update(updates);
+
+  return cors(req, res, () => {
+    res.status(200).send('{message: ok}');
+  });
 });
 
