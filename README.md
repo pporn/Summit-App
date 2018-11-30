@@ -25,7 +25,7 @@
     - Expected Result: PATH/Summit-App
 5. Type: git remote -v
     - Expected result:
-    
+
     origin  [https://github.com/\&lt;USERNAME\&gt;/Summit-App.git](https://github.com/%3cUSERNAME%3e/Summit-App.git) (fetch)
 
     origin  [https://github.com/\&lt;USERNAME\&gt;/Summit-App.git](https://github.com/%3cUSERNAME%3e/Summit-App.git) (push)
@@ -47,7 +47,7 @@ So, we have our SummitApp/Summit-App repo that has a master and a develop branch
 
 **Using Git**
 
-These will be the steps you do when getting information to/from the develop branch and your fork. When in doubt about anything, ping Trace/Andrew and we will see what we can help with. Oftentimes "git status" will give you information on what you need to do! NEVER push straight to our develop branch. If you want to get your code into develop, submita PR. 
+These will be the steps you do when getting information to/from the develop branch and your fork. When in doubt about anything, ping Trace/Andrew and we will see what we can help with. Oftentimes "git status" will give you information on what you need to do! NEVER push straight to our develop branch. If you want to get your code into develop, submita PR.
 
 Do not work on the same feature that others are working on, this will cause merging problems that I'm not very good at resolving. If you have an issue ask Andrew.
 
@@ -88,7 +88,7 @@ Do not work on the same feature that others are working on, this will cause merg
     - Click "Start Review" (this will add things to a stack if you have multiple comments to make) otherwise click "Add single comment"
     - When done click the "Review Changes" button (its green) and select Comment/Approve/Request Changes depending on if the PR should be accepted/edited. (The person who made a PR will get notification of once you do this)
     - (REPEAT TILL READY TO MERGE)
-    - WHEN IN DOUBT ABOUT THE FOLLOWING STEPS - ask Trace/Andrew for help to reduce merging problems. We will be happy to help out :) 
+    - WHEN IN DOUBT ABOUT THE FOLLOWING STEPS - ask Trace/Andrew for help to reduce merging problems. We will be happy to help out :)
     - When ready to merge all you need to do is:
     - Make sure the PR can be automatically merged (if it isn't talk with Trace/Andrew)
     - Make sure the green button says "Merge pull request"
