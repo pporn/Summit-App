@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import addClients from './ClientRegistrationVirtualController';
 import { Button }  from 'react-bootstrap';
 import { printDate, verifyName } from '../Shared/Utils.js'
-<<<<<<< HEAD
+import DOB from '../Shared/DobInput.jsx';
 import { Router, Route, Link } from 'react-router-dom';
 
-=======
-import DOB from '../Shared/DobInput.jsx';
->>>>>>> 1a7775d2cdd2f97c998ab195edb4a2f44507c5d3
 class ClientRegistration extends Component {
     constructor (props) {
         super(props);
@@ -78,12 +75,8 @@ class ClientRegistration extends Component {
     confirmNewUser(query_result){
         if(query_result.error === "none"){
             alert('Successfully added User')
-<<<<<<< HEAD
             window.location='/MedicalQuestionnaire';
 
-=======
-            //redirect to next page
->>>>>>> 1a7775d2cdd2f97c998ab195edb4a2f44507c5d3
         }
         else if(query_result.error === "DBFail"){
             alert('Database Error')
