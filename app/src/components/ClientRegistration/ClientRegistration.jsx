@@ -3,6 +3,8 @@ import addClients from './ClientRegistrationVirtualController';
 import { Button }  from 'react-bootstrap';
 import { printDate, verifyName } from '../Shared/Utils.js'
 import DOB from '../Shared/DobInput.jsx';
+import { Router, Route, Link } from 'react-router-dom';
+
 class ClientRegistration extends Component {
     constructor (props) {
         super(props);
@@ -73,7 +75,8 @@ class ClientRegistration extends Component {
     confirmNewUser(query_result){
         if(query_result.error === "none"){
             alert('Successfully added User')
-            //redirect to next page
+            window.location='/MedicalQuestionnaire';
+
         }
         else if(query_result.error === "DBFail"){
             alert('Database Error')
@@ -107,7 +110,7 @@ class ClientRegistration extends Component {
     }
 
     handleClientDOB(clientDob) {
-        this.setState({ 
+        this.setState({
             dob: clientDob,
             dobCompleted: true
         });
@@ -119,33 +122,35 @@ class ClientRegistration extends Component {
         <div className="ClientRegistration">
             <form id="form1" onSubmit={this.handleSubmit}>
                 First Name:
-                <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}/>
+                <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}
+                    id="NewUserFirst"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
                 <br/>
 
                 Last Name:
-                <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}/>
+                <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}
+                    id="NewUserLast"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
                 <br/>
-               
+
                 Enter Date of Birth:
                 {<DOB onValidDOB={this.handleClientDOB}/>}
                 {
                     this.state.dobCompleted
                         ?
-                        <Button 
-                            bsStyle="primary" 
+                        <Button
+                            bsStyle="primary"
                             form="form1"
                             type="submit">
                             Sign Up
                         </Button>
                         : null
                 }
-               
+
             </form>
         </div>
       );

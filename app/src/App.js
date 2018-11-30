@@ -16,6 +16,7 @@ import MedicalQuestionnaire from './components/MedicalQuestionnaire/MedicalQuest
 import EmployeePage from './components/EmployeePage/EmployeePageContainer.jsx';
 import AlertManagement from './components/AlertManagement/AlertManagementContainer.jsx';
 import CreateAlert from './components/CreateAlert/CreateAlertContainer.jsx';
+import HowToUseApp from './components/HowToUseApp/HowToUseAppContainer.jsx';
 
 const Header = () => (
   <div>
@@ -54,6 +55,7 @@ class App extends Component {
           <Route path='/AlertManagement' component={AlertManagement}/>
           <Route path='/CreateAlert' component={CreateAlert}/>
           <Route path='/MedicalQuestionnaire' component={MedicalQuestionnaire}/>
+          <Route path='/HowToUseApp' component={HowToUseApp}/>
         </Switch>
       </div>
     );
