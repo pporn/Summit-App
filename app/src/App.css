@@ -31,3 +31,40 @@
   }
 }
 
+#Main-Container {
+  padding:2%;
+}
+
+#Employee-Login-Button {
+  float: right;
+}
+
+#Centralized-In-Page {
+  padding-top: 5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#Centralized-In-Block {
+  margin: 0 auto;
+  padding-bottom: 15%;
+}
+
+.Authenticatin-Div {
+  min-width: 30%;
+  margin: 30px 0;
+}
+
+#Top-Padding {
+  padding-top: 3%;
+}
+
+#Bottom-Padding {
+  padding-bottom: 3%;
+}
+
+#Padding-Left {
+  padding-left: 3%;
+}

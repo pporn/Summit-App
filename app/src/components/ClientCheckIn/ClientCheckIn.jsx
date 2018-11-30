@@ -66,10 +66,20 @@ class ClientCheckIn extends Component {
 
         return(
             <div>
-                <ClientAuthentication clients={this.state.clients} onAuthentication={this.onAuthentication}/>
-                <ContinueToAccountQuestion showQuestion={this.state.showContinueQuestion} name={this.state.clientName} test={true} userId={this.state.userId}/>
-                <DateError showError={this.state.invalidDate}/>
-                <PasswordError showError={this.state.invalidPassword}/>
+                { (!this.state.showContinueQuestion)
+                    ?
+                        <div>
+                            <ClientAuthentication clients={this.state.clients} onAuthentication={this.onAuthentication}/>
+                            <DateError showError={this.state.invalidDate}/>
+                            <PasswordError showError={this.state.invalidPassword}/>
+                        </div>
+                    :
+                        <div id="Centralized-In-Page">
+                            <ContinueToAccountQuestion showQuestion={this.state.showContinueQuestion} name={this.state.clientName} test={true} userId={this.state.userId}/>
+                        </div>
+                }
+
+
             </div>
         )
     }

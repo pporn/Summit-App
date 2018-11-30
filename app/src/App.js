@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Navbar, Nav, NavItem } from "react-bootstrap";
 
 import './App.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
@@ -27,6 +27,11 @@ const Header = () => (
         </Button>
       </Link>
     </span>
+    <span id="Employee-Login-Button">
+      <Link to='/EmployeePage'>
+        <Button bsStyle="primary">Employee Login</Button>
+      </Link>
+    </span>
     <hr/>
   </div>
 )
@@ -34,9 +39,9 @@ const Header = () => (
 class App extends Component {
   render() {
     return (
-      <div>
+      <div id="Main-Container">
         <Header />
-        <Switch>
+        <Switch onChange={() => {alert("hi")}}>
           <Route exact path='/' component={MainMenu}/>
           <Route exact path='/Home' component={MainMenu}/>
           <Route path='/GymInformation' component={GymInformation}/>

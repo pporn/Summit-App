@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import addClients from './ClientRegistrationVirtualController';
 import { Button }  from 'react-bootstrap';
-import DatePicker from 'react-mobile-datepicker';
 import { printDate, verifyName } from '../Shared/Utils.js'
+<<<<<<< HEAD
 import { Router, Route, Link } from 'react-router-dom';
 
+=======
+import DOB from '../Shared/DobInput.jsx';
+>>>>>>> 1a7775d2cdd2f97c998ab195edb4a2f44507c5d3
 class ClientRegistration extends Component {
     constructor (props) {
         super(props);
@@ -13,16 +16,16 @@ class ClientRegistration extends Component {
         this.state = {
             firstName: '',
             lastName: '',
-            dob: this.timeFormatter(new Date()),
-            time: new Date(),
-            isOpen: false,
+            dob: null,
+            dobCompleted: false,
             isNameValid: true,
         }
 
         // bind all functions
+
+        this.handleClientDOB = this.handleClientDOB.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.handleCancel = this.handleCancel.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDOBInput = this.handleDOBInput.bind(this);
         this.timeFormatter = this.timeFormatter.bind(this);
@@ -33,6 +36,7 @@ class ClientRegistration extends Component {
             [event.target.name]: event.target.value
         })
     }
+
 
     handleSubmit (event) {
         event.preventDefault()
@@ -74,8 +78,12 @@ class ClientRegistration extends Component {
     confirmNewUser(query_result){
         if(query_result.error === "none"){
             alert('Successfully added User')
+<<<<<<< HEAD
             window.location='/MedicalQuestionnaire';
 
+=======
+            //redirect to next page
+>>>>>>> 1a7775d2cdd2f97c998ab195edb4a2f44507c5d3
         }
         else if(query_result.error === "DBFail"){
             alert('Database Error')
@@ -94,10 +102,6 @@ class ClientRegistration extends Component {
         return date;
     }
 
-    handleCancel = () => {
-        this.setState({ isOpen: false });
-    }
-
     handleSelect = (time) => {
         this.setState({
             dob: this.timeFormatter(time),
@@ -111,6 +115,14 @@ class ClientRegistration extends Component {
             isOpen: true,
         })
     }
+
+    handleClientDOB(clientDob) {
+        this.setState({
+            dob: clientDob,
+            dobCompleted: true
+        });
+    }
+
 
     render() {
       return (
@@ -133,20 +145,20 @@ class ClientRegistration extends Component {
                 <br/>
 
                 Enter Date of Birth:
-                <input name="dob" type="input" value={printDate(this.state.time)} onClick={this.handleDOBInput} onChange={this.handleChange}
-                    id="NewUserDOB"/>
+                {<DOB onValidDOB={this.handleClientDOB}/>}
+                {
+                    this.state.dobCompleted
+                        ?
+                        <Button
+                            bsStyle="primary"
+                            form="form1"
+                            type="submit">
+                            Sign Up
+                        </Button>
+                        : null
+                }
 
-                <DatePicker
-                    value={this.state.time}
-                    isOpen={this.state.isOpen}
-                    onSelect={this.handleSelect}
-                    onCancel={this.handleCancel}
-                    confirmText="Done"
-                    cancelText="Cancel"
-                    theme="ios"
-                />
             </form>
-            <Button bsStyle="primary" form="form1" type="submit">Submit</Button>
         </div>
       );
     }
