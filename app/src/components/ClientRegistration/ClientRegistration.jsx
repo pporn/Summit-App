@@ -3,6 +3,7 @@ import addClients from './ClientRegistrationVirtualController';
 import { Button }  from 'react-bootstrap';
 import DatePicker from 'react-mobile-datepicker';
 import { printDate, verifyName } from '../Shared/Utils.js'
+import { Router, Route, Link } from 'react-router-dom';
 
 class ClientRegistration extends Component {
     constructor (props) {
@@ -73,7 +74,7 @@ class ClientRegistration extends Component {
     confirmNewUser(query_result){
         if(query_result.error === "none"){
             alert('Successfully added User')
-            //redirect to next page
+            window.location='/MedicalQuestionnaire';
 
         }
         else if(query_result.error === "DBFail"){
@@ -116,21 +117,24 @@ class ClientRegistration extends Component {
         <div className="ClientRegistration">
             <form id="form1" onSubmit={this.handleSubmit}>
                 First Name:
-                <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}/>
+                <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}
+                    id="NewUserFirst"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
                 <br/>
 
                 Last Name:
-                <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}/>
+                <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}
+                    id="NewUserLast"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
                 <br/>
 
                 Enter Date of Birth:
-                <input name="dob" type="input" value={printDate(this.state.time)} onClick={this.handleDOBInput} onChange={this.handleChange}/>
+                <input name="dob" type="input" value={printDate(this.state.time)} onClick={this.handleDOBInput} onChange={this.handleChange}
+                    id="NewUserDOB"/>
 
                 <DatePicker
                     value={this.state.time}
