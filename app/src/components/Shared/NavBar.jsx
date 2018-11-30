@@ -3,6 +3,13 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class NavBar extends Component {
+<<<<<<< HEAD
+=======
+    constructor(props) {
+        super(props)
+    }
+
+>>>>>>> Header moved to NavBar
     render() {
         let curr_component = window.location.href.split("/")[3];
         return(
