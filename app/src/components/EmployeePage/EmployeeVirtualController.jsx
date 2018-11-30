@@ -7,7 +7,7 @@ function addClients(payload, callback){
     const last_name = payload.lastName;
     const date_of_birth = payload.dob;
 
-    const apiDeleteUser = 'https://us-central1-summit-app-6f288.cloudfunctions.net/addUser?';
+    const apiDeleteUser = 'https://us-central1-summit-app-6f288.cloudfunctions.net/deleteUser?';
     const query = queryBuilder(apiDeleteUser)
                     .param('first_name').val(first_name)
                     .param('last_name').val(last_name)
