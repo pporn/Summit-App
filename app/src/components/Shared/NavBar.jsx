@@ -3,10 +3,6 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class NavBar extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         let curr_component = window.location.href.split("/")[3];
         return(
