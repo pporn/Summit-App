@@ -73,8 +73,7 @@ class ClientRegistration extends Component {
     confirmNewUser(query_result){
         if(query_result.error === "none"){
             alert('Successfully added User')
-            window.location='/MedicalQuestionnaire';
-
+            //redirect to next page
         }
         else if(query_result.error === "DBFail"){
             alert('Database Error')
@@ -120,16 +119,14 @@ class ClientRegistration extends Component {
         <div className="ClientRegistration">
             <form id="form1" onSubmit={this.handleSubmit}>
                 First Name:
-                <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}
-                    id="NewUserFirst"/>
+                <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
                 <br/>
 
                 Last Name:
-                <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}
-                    id="NewUserLast"/>
+                <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
