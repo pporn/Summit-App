@@ -23,6 +23,7 @@ exports.addUser = functions.https.onRequest((req, res) => {
     'first_name': first_name,
     'last_name': last_name,
     'date_of_birth': date_of_birth,
+    'punch_card': 10,
   });
 
   return cors(req, res, () => {
@@ -213,7 +214,7 @@ exports.getAllUserNames = functions.https.onRequest((req, res) => {
   allUsers.once('value')
     .then(snapshot => {
       const names = [];
-      
+
       snapshot.forEach((entry) => {
         //get user info
         const userInfo = entry.val();
@@ -230,6 +231,63 @@ exports.getAllUserNames = functions.https.onRequest((req, res) => {
         res.status(422).send({'message': 'Fail to get user info'});
       });
     });
+});
+
+exports.userCheckIn = functions.https.onRequest((req, res) => {
+   // return if method is not post
+  if(req.method !== 'POST') {
+    return cors(req, res, () => {
+      res.status(422).send({'message': 'Not POST'});
+    });
+  }
+
+  const userId = req.body.user_id;
+
+  const userRoot = admin.database().ref('user').child(userId);
+
+  userRoot.once('value')
+    .then((snapshot) => {
+      //check whether user exists
+      if(!snapshot.exists()) {
+        // return 422 for medical info
+        return cors(req, res, () => {
+          res.status(422).send('{message: user does not exist}');
+        });
+      }
+
+      const punchCard = snapshot.val().punch_card;
+      // we need to make sure punch card is > 0
+      if(punchCard !== undefined && punchCard <= 0) {
+        return cors(req, res, () => {
+          res.status(422).send('{message: no punch card left}');
+        });
+      }
+
+      // get key and timestamp
+      const key = userRoot.push().key;
+      const timestamp = new Date().getTime();
+      const updates = {};
+
+      updates['check_in/' + key] = timestamp;
+      updates['last_check_in'] = timestamp;
+
+      // punch card
+      if(punchCard !== undefined) {
+        updates['punch_card'] = punchCard - 1;
+      }
+
+      userRoot.update(updates);
+
+      return cors(req, res, () => {
+          res.status(200).send('{message: ok}');
+      });
+    }).catch(error => {
+      return cors(req, res, () => {
+        res.status(422).send('{"message": "cannot check in"}');
+      });
+    });
+
+    return null;
 });
 
 // ============ Medical Questionnaire Functions ===============
@@ -258,7 +316,7 @@ exports.setGeneralMedInfo = functions.https.onRequest((req, res) => {
       if(!snapshot.exists()) {
         // return 422 for medical info
         return cors(req, res, () => {
-          res.status(422).send('{message: user does not exist}');
+          res.status(422).send('{"message": "user does not exist"}');
         });
       }
 
@@ -272,13 +330,13 @@ exports.setGeneralMedInfo = functions.https.onRequest((req, res) => {
     }).catch(error => {
       // handle other errors
       return cors(req, res, () => {
-       res.status(422).send('{message: Cannot set general medical info}');
+       res.status(422).send('{"message": "Cannot set general medical info"}');
       });
     });
 
     // return success
     return cors(req, res, () => {
-      res.status(200).send('{message: ok}');
+      res.status(200).send('{"message": "ok"}');
     });
 });
 
