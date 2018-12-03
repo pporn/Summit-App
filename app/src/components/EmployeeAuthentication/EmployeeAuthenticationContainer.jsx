@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import authEmployee from './EmployeeAuthenticationVirtualController';
 
 class EmployeeAuthenticationContainer extends Component {
@@ -9,6 +10,7 @@ class EmployeeAuthenticationContainer extends Component {
         this.state = {
             email: '',
             password: '',
+            employeeId: undefined,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +26,6 @@ class EmployeeAuthenticationContainer extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
 
         const payload = {
             email: this.state.email,
@@ -41,7 +42,10 @@ class EmployeeAuthenticationContainer extends Component {
             return;
         }
 
-        alert('logged in!');
+        // set employee id
+        this.setState({
+            employeeId: payload.userId,
+        });
 
         return;
     }
@@ -66,6 +70,15 @@ class EmployeeAuthenticationContainer extends Component {
                         Log In
                     </Button>
                 </form>
+
+                {this.state.employeeId &&
+                    <Redirect to={{
+                        pathname: "/EmployeePage",
+                        state: {
+                            employeeId: this.state.employeeId,
+                        },
+                    }} />
+                }
             </div>
         );
     }

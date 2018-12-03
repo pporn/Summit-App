@@ -17,7 +17,7 @@ class NavBar extends Component {
                 { (curr_component === "" || curr_component === "Home")
                     ?
                         <span id="Employee-Login-Button">
-                            <Link to='/EmployeePage'>
+                            <Link to='/EmployeeAuthentication'>
                                 <Button bsStyle="primary">Employee Login</Button>
                             </Link>
                         </span>
