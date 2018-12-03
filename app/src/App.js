@@ -17,6 +17,7 @@ import AlertManagement from './components/AlertManagement/AlertManagementContain
 import CreateAlert from './components/CreateAlert/CreateAlertContainer.jsx';
 import HowToUseApp from './components/HowToUseApp/HowToUseAppContainer.jsx';
 import NavBar from './components/Shared/NavBar.jsx';
+import DeleteUser from './components/DeleteUser/DeleteUserContainer.jsx'
 
 class App extends Component {
   render() {
@@ -35,6 +36,7 @@ class App extends Component {
           <Route path='/MedicalQuestionnaire' component={MedicalQuestionnaire}/>
           <Route path='/EmployeePage' component={EmployeePage}/>
           <Route path='/AlertManagement' component={AlertManagement}/>
+          <Route path='/DeleteUser' component={DeleteUser}/>
           <Route path='/CreateAlert' component={CreateAlert}/>
           <Route path='/MedicalQuestionnaire' component={MedicalQuestionnaire}/>
           <Route path='/HowToUseApp' component={HowToUseApp}/>

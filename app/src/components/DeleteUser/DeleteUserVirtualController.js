@@ -1,6 +1,6 @@
 import { queryBuilder } from '../Shared/Utils.js';
 
-function addClients(payload, callback){
+function deleteUser(payload, callback){
 
     // Paramters
     const first_name = payload.firstName;
@@ -20,9 +20,10 @@ function addClients(payload, callback){
             // return true upon successful call
             if(res.status === 200) {
                 payload.authenticated = true;
+                callback({ error: "none" })
+            } else {
+                callback({ error: "DBFail" });
             }
-            callback({error: "none"})
-           // callback({});
         }).catch(error => {
             callback({error: "DBFail"});
         });
