@@ -3,7 +3,6 @@ import addClients from './ClientRegistrationVirtualController';
 import { Button }  from 'react-bootstrap';
 import { verifyName } from '../Shared/Utils.js'
 import DOB from '../Shared/DobInput.jsx';
-import { Router, Route, Link } from 'react-router-dom';
 
 class ClientRegistration extends Component {
     constructor (props) {
