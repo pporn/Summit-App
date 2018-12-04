@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { setMedicalQuestionnaire } from './MedicalQuestionnaireVirtualController'
+import { Redirect } from 'react-router-dom';
 
 class MedicalQuestionnaire extends Component {
     constructor (props) {
@@ -32,7 +33,6 @@ class MedicalQuestionnaire extends Component {
         console.log(this.state);
 
         setMedicalQuestionnaire(this.state, this.onFinish);
-        window.location='/HowToUseApp';
     }
 
     onFinish(isSuccessful) {
@@ -73,7 +73,10 @@ class MedicalQuestionnaire extends Component {
                 <input type="submit" value="Submit"/>
             </form>
             {this.state.isSubmitted &&
-                <h3>Submitted</h3>
+                <Redirect
+                    to={{
+                        pathname: "/HowToUseApp",
+                    }} />
             }
         </div>
       );
