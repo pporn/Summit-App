@@ -27,4 +27,27 @@ function getClients(setNewClients) {
     return null;
 }
 
-export { getClients };
+function checkIn(userId, callback) {
+    const api = 'https://us-central1-summit-app-6f288.cloudfunctions.net/userCheckIn';
+    const payload = {
+        user_id: userId,
+    };
+
+    fetch(api, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    }).then((res) => {
+        if(res.status === 200) {
+            callback(true, {});
+        } else if(res.status === 422) {
+            res.json().then((message) => {
+                callback(false, message);
+            });
+        }
+    });
+}
+
+export { getClients, checkIn };

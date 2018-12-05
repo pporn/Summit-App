@@ -19,6 +19,8 @@ import HowToUseApp from './components/HowToUseApp/HowToUseAppContainer.jsx';
 import NavBar from './components/Shared/NavBar.jsx';
 import DeleteUser from './components/DeleteUser/DeleteUserContainer.jsx';
 import EmployeeAuthentication from './components/EmployeeAuthentication/EmployeeAuthenticationContainer.jsx';
+import UserManagement from './components/UserManagement/UserManagementContainer.jsx';
+import RefillPunchCards from './components/RefillPunchCards/RefillPunchCardsContainer.jsx'
 
 class App extends Component {
   render() {
@@ -38,10 +40,12 @@ class App extends Component {
           <Route path='/EmployeeAuthentication' component={EmployeeAuthentication}/>
           <Route path='/EmployeePage' component={EmployeePage}/>
           <Route path='/AlertManagement' component={AlertManagement}/>
+          <Route path='/UserManagement' component={UserManagement}/>
           <Route path='/DeleteUser' component={DeleteUser}/>
           <Route path='/CreateAlert' component={CreateAlert}/>
           <Route path='/MedicalQuestionnaire' component={MedicalQuestionnaire}/>
           <Route path='/HowToUseApp' component={HowToUseApp}/>
+          <Route path='/RefillPunchCards' component={RefillPunchCards}/>
         </Switch>
       </div>
     );

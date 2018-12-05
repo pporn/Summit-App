@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import ClientAuthentication from '../ClientAuthentication/ClientAuthentication.jsx';
 import ContinueToAccountQuestion from '../ClientAuthentication/ContinueToAccount.jsx';
-import { getClients } from './ClientCheckInVirtualController';
+import { getClients, checkIn } from './ClientCheckInVirtualController';
 import DateError from './DateError.jsx'
 import PasswordError from './PasswordError.jsx'
-
 
 class ClientCheckIn extends Component {
     constructor(props) {
@@ -19,6 +18,7 @@ class ClientCheckIn extends Component {
 
         this.onAuthentication = this.onAuthentication.bind(this);
         this.setNewClients = this.setNewClients.bind(this);
+        this.onUserCheckedIn = this.onUserCheckedIn.bind(this);
     }
 
     onAuthentication(payload) {
@@ -34,21 +34,32 @@ class ClientCheckIn extends Component {
                 invalidDate: false
             });
         }
-        
 
         if(payload.authenticated) {
-            this.setState({ 
+            this.setState({
                 clientName: payload.name,
-                showContinueQuestion: true,
                 invalidDate: false,
                 invalidPassword: false,
                 userId: payload.userId,
             });
+
+            // after authenticated, we neet to actually check user in
+            checkIn(payload.userId, this.onUserCheckedIn);
         }
         else {
-            this.setState({ 
+            this.setState({
                 invalidPassword: true
             });
+        }
+    }
+
+    onUserCheckedIn(isSuccess, payload) {
+        if(isSuccess) {
+            this.setState({
+                showContinueQuestion: true,
+            });
+        } else {
+            alert(payload.message);
         }
     }
 
@@ -63,7 +74,6 @@ class ClientCheckIn extends Component {
     }
 
     render() {
-
         return(
             <div>
                 { (!this.state.showContinueQuestion)
@@ -78,10 +88,8 @@ class ClientCheckIn extends Component {
                             <ContinueToAccountQuestion showQuestion={this.state.showContinueQuestion} name={this.state.clientName} test={true} userId={this.state.userId}/>
                         </div>
                 }
-
-
             </div>
-        )
+        );
     }
 }
 

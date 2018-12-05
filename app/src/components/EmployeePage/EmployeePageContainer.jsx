@@ -11,8 +11,8 @@ class EmployeePageContainer extends Component {
                         <Link to='/AlertManagement' id='Centralized-In-Block'>
                             <Button bsStyle='primary'>Alert Management</Button>
                         </Link>
-                        <Link to='/DeleteUser' id='Centralized-In-Block'>
-                            <Button bsStyle='primary'>Delete User</Button>
+                        <Link to='/UserManagement' id='Centralized-In-Block'>
+                            <Button bsStyle='primary'>User Management</Button>
                         </Link>
                     </ButtonGroup>
                 </ButtonToolbar>
