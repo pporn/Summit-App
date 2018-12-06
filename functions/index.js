@@ -338,6 +338,45 @@ exports.refillPunchCards = functions.https.onRequest((req, res) => {
     });
 });
 
+/**************************/
+/*   getUserLastCheckIn   */
+/**************************/
+
+exports.getUserLastCheckIn = functions.https.onRequest((req, res) => {
+   const userId = req.query.user_id;
+
+    const userInfo = admin.database().ref('user').child(userId);
+
+    if(userId === '/') {
+     return cors(req, res, () => {
+       res.status(422).send(JSON.stringify({message: 'User id not found'}));
+     });
+    }
+    return userInfo.once('value')
+        .then((snapshot) => {
+            if (!snapshot.exists()) {
+                return cors(req, res, () => {
+                    res.status(422).send({'message': 'User id not found'});
+                });
+            }
+            const lastCheckIn = snapshot.val().last_check_in;
+            const date = new Date(lastCheckIn);
+            if (lastCheckIn !== undefined) {
+                return cors(req, res, () => {
+                    res.status(200).send(JSON.stringify(date.toLocaleString()));
+                });
+            } else {
+                return cors(req, res, () => {
+                    res.status(422).send({'message' : 'This user has not been checked in.'});
+                });
+            }
+        }).catch(error => {
+            return cors(req, res, () => {
+                res.status(422).send({'message' : 'Fail to get check-in time'});
+            });
+        });
+
+});
 // ============ Medical Questionnaire Functions ===============
 
 /**************************/
