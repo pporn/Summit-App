@@ -13,7 +13,7 @@ function UserManagementContainer() {
                         </Button>
                     </Link>
 
-                    <Link to='/DeleteUser' id='Centralized-In-Block'>
+                    <Link to='/ViewUserInfo' id='Centralized-In-Block'>
                         <Button bsStyle='primary' bsSize='large'>
                             View User Info
                         </Button>
