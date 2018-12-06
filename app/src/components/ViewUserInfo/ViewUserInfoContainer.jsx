@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { verifyName } from '../Shared/Utils.js';
 import DOB from '../Shared/DobInput';
-import refillPunchCards from './RefillPunchCardsVirtualController';
+import getUserInfo from './ViewUserInfoVirtualController';
+import UserInfoPage from './UserInfoPage';
 
-class RefillPunchCardsContainer extends Component {
+class ViewUserInfoContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -14,14 +15,15 @@ class RefillPunchCardsContainer extends Component {
             lastName: '',
             dob: null,
             dobCompleted: false,
-            refillAmount: 0,
+            userInfo: undefined,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleClientDOB = this.handleClientDOB.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.nameCheck = this.nameCheck.bind(this);
-        this.onRefilled = this.onRefilled.bind(this);
+        this.onGetUserInfo = this.onGetUserInfo.bind(this);
+        this.fetchUserInfo = this.fetchUserInfo.bind(this);
     }
 
     handleChange (event) {
@@ -41,44 +43,40 @@ class RefillPunchCardsContainer extends Component {
         // prevent default operation
         event.preventDefault();
 
-        // pop up confirmation
-        const retVal = window.confirm("Do you want to continue?");
-
-        // quit unintended operation
-        if(!retVal) {
-            return;
-        }
-
         const validNameCheck = this.nameCheck();
 
-        if(validNameCheck.validName === true && this.state.refillAmount > 0){
+        if(validNameCheck.validName === true){
             this.setState({ isNameValid: true});
 
             const payload = {
                 firstName : validNameCheck.firstName,
                 lastName  : validNameCheck.lastName,
                 dob       : this.state.dob,
-                refillAmount : parseInt(this.state.refillAmount),
             };
 
-            refillPunchCards(payload, this.onRefilled);
-        } else {
-            if(validNameCheck.validName === false) {
-                alert('Invalid name')
-            } else if(this.state.refillAmount <= 0) {
-                alert('Invalid refill amount')
-            }
-
+            getUserInfo(payload, this.onGetUserInfo);
+        }
+        else{
             this.setState({ isNameValid: false });
         }
     }
 
-    onRefilled(result, { error }) {
-        if(result) {
-            alert('Successfully refilled');
+    onGetUserInfo(isSuccess, payload) {
+        if(isSuccess) {
+            console.log(payload);
+            this.setState({
+                userInfo: payload,
+            })
         } else {
+            // get error
+            const { error } = payload;
+
             alert(error);
         }
+    }
+
+    fetchUserInfo() {
+        return this.state.userInfo;
     }
 
     nameCheck(){
@@ -96,6 +94,7 @@ class RefillPunchCardsContainer extends Component {
     render() {
         return(
             <div className='Centralized-In-Block'>
+            {this.state.userInfo === undefined &&
                 <form id='form1' onSubmit={this.handleSubmit}>
                     First Name:
                     <input name='firstName' type='text' value={this.state.firstName} onChange={this.handleChange} />
@@ -109,23 +108,23 @@ class RefillPunchCardsContainer extends Component {
                     <DOB onValidDOB={this.handleClientDOB}/>
                     <br />
 
-                    Refill Amount:
-                    <input name='refillAmount' type='text' value={this.state.newPunchCard} onChange={this.handleChange} />
-                    <br />
-
-                    {this.state.dobCompleted && this.state.refillAmount > 0 &&
+                    {this.state.dobCompleted &&
                     <Button
                         bsStyle='primary'
                         form='form1'
                         type='submit'
                     >
-                        Add Punch Card
+                        View User Info
                     </Button>
                     }
                 </form>
+            }
+            {this.state.userInfo &&
+                <UserInfoPage getUserInfo={this.fetchUserInfo} />
+            }
             </div>
         );
     }
 }
 
-export default RefillPunchCardsContainer;
+export default ViewUserInfoContainer;
