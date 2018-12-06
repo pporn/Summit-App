@@ -181,7 +181,7 @@ exports.getUserInfo = functions.https.onRequest((req, res) => {
   // Prevent injection
   if(userId === '/') {
     return cors(req, res, () => {
-      res.status(422).send({'message': 'User id not found'});
+      res.status(422).send(JSON.stringify({message: 'User id not found'}));
     });
   }
 
