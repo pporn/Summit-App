@@ -1,5 +1,4 @@
 import { queryBuilder } from '../Shared/Utils.js';
-
 function getUserInfo(userId, callback) {
     // construct query
     const api = 'https://us-central1-summit-app-6f288.cloudfunctions.net/getUserInfo?';
