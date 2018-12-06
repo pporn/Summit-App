@@ -1,7 +1,8 @@
+
 import { queryBuilder } from '../Shared/Utils.js';
-function getUserInfo(userId, callback) {
-    // construct query
-    const api = 'https://us-central1-summit-app-6f288.cloudfunctions.net/getUserInfo?';
+function getLastCheckIn(userId, callback) {
+// construct query
+    const api = "https://us-central1-summit-app-6f288.cloudfunctions.net/getUserLastCheckIn?"
     const query = queryBuilder(api)
                     .param('user_id').val(userId)
                     .getUrl();
@@ -25,6 +26,6 @@ function getUserInfo(userId, callback) {
     } catch (e) {
         return null;
     }
-}
 
-export default getUserInfo;
+}
+export default getLastCheckIn;
