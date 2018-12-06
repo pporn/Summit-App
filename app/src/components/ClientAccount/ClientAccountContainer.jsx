@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import getUserInfo from './ClientAccountVirtualController'
-
+import getLastCheckIn from './ClientAccountCheckInVirtualController.jsx'
 class ClientAccountContainer extends Component {
     constructor(props) {
         super(props)
@@ -8,9 +8,11 @@ class ClientAccountContainer extends Component {
         this.state = {
             userId: 'N/A',
             userInfo: undefined,
+            last_check_in: undefined,
         }
 
-        this.onFinish = this.onFinish.bind(this);
+        this.onFinishUserInfo = this.onFinishUserInfo.bind(this);
+        this.onFinishLastCI = this.onFinishLastCI.bind(this);
     }
 
     componentDidMount() {
@@ -20,18 +22,27 @@ class ClientAccountContainer extends Component {
             userId: userId,
         });
 
-        getUserInfo(userId, this.onFinish);
+        getUserInfo(userId, this.onFinishUserInfo);
+        getLastCheckIn(userId, this.onFinishLastCI);
     }
 
-    onFinish(userInfo) {
+    onFinishUserInfo(userInfo) {
         this.setState({
             userInfo: userInfo,
         });
     }
 
+    onFinishLastCI(checkInInfo) {
+        console.log(checkInInfo);
+        this.setState({
+            last_check_in : checkInInfo,
+        })
+    }
+
     render() {
         if(this.state.userInfo) {
             const { first_name, last_name, date_of_birth} = this.state.userInfo;
+            const last_check_in = this.state.last_check_in;
             const userName = first_name + ' ' + last_name;
 
             return(
@@ -39,6 +50,7 @@ class ClientAccountContainer extends Component {
                     <h2>Client Account Page</h2>
                     <h3>Name: {userName}</h3>
                     <h3>Date of Birth: {date_of_birth}</h3>
+                    <h3>Last Check-in: {last_check_in}</h3>
                 </div>
             );
         }
