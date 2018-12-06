@@ -21,6 +21,7 @@ import DeleteUser from './components/DeleteUser/DeleteUserContainer.jsx';
 import EmployeeAuthentication from './components/EmployeeAuthentication/EmployeeAuthenticationContainer.jsx';
 import UserManagement from './components/UserManagement/UserManagementContainer.jsx';
 import RefillPunchCards from './components/RefillPunchCards/RefillPunchCardsContainer.jsx'
+import ViewUserInfo from './components/ViewUserInfo/ViewUserInfoContainer.jsx'
 
 class App extends Component {
   render() {
@@ -46,6 +47,7 @@ class App extends Component {
           <Route path='/MedicalQuestionnaire' component={MedicalQuestionnaire}/>
           <Route path='/HowToUseApp' component={HowToUseApp}/>
           <Route path='/RefillPunchCards' component={RefillPunchCards}/>
+          <Route path='/ViewUserInfo' component={ViewUserInfo}/>
         </Switch>
       </div>
     );
