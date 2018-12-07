@@ -81,7 +81,7 @@ class ClientAccountContainer extends Component {
             <div>
                 {active_alerts &&
                     active_alerts.map(alert => (
-                        <Alert bsStyle='danger'>{alert.name}: {alert.description}</Alert>
+                        <Alert bsStyle='danger' key={alert.id}>{alert.name}: {alert.description}</Alert>
                     ))
                 }
                 {!this.state.userInfo &&
