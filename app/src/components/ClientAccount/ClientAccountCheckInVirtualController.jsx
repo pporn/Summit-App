@@ -14,8 +14,8 @@ function getLastCheckIn(userId, callback) {
             if(res.status === 200) {
                 res = res.json();
 
-                res.then((data) => {
-                    callback(data);
+                res.then(({ lastCheckIn }) => {
+                    callback(lastCheckIn);
                 });
             } else {
                 return null;

@@ -47,12 +47,25 @@ class ClientAccountContainer extends Component {
        });
     }
     render() {
+        let last_check_in;
+        let userName;
+        let punch;
+        let date_of_birth;
+
         if(this.state.userInfo) {
-            const { first_name, last_name, date_of_birth} = this.state.userInfo;
-            const last_check_in = this.state.last_check_in;
-            const userName = first_name + ' ' + last_name;
-            const punch = this.state.punch;
-            return(
+            const { first_name, last_name } = this.state.userInfo;
+            last_check_in = new Date(this.state.last_check_in).toLocaleString();
+            userName = first_name + ' ' + last_name;
+            punch = this.state.punch;
+            date_of_birth = this.state.userInfo.date_of_birth;
+        }
+
+        return (
+            <div>
+                {!this.state.userInfo &&
+                <h2>Loading</h2>
+                }
+                {this.state.userInfo &&
                 <div>
                     <h2>Client Account Page</h2>
                     <h3>Name: {userName}</h3>
@@ -60,12 +73,7 @@ class ClientAccountContainer extends Component {
                     <h3>Last Check-in: {last_check_in}</h3>
                     <h3>Punch Card Balance: {punch} </h3>
                 </div>
-            );
-        }
-
-        return (
-            <div>
-                <h2>Loading</h2>
+                }
             </div>
         );
     }
