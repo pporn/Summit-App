@@ -14,8 +14,8 @@ class MainMenu extends Component {
                         <Link to='/Login' id="Centralized-In-Block">
                             <Button bsSize="large" bsStyle="primary">Login</Button>
                         </Link>
-                        <Link to='/ClientRegistration' id="Centralized-In-Block">
-                            <Button bsSize="large" bsStyle="primary">New User</Button>
+                        <Link to='/GymInformation' id="Centralized-In-Block">
+                            <Button bsSize="large" bsStyle="primary">Gym Info</Button>
                         </Link>
                     </ButtonGroup>
                 </ButtonToolbar>

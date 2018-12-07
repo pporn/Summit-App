@@ -14,12 +14,14 @@ class ClientAuthentication extends Component {
             dobCompleted: false,
             nameSelected: null,
             hasSelected: false,
-            clients: null
+            clients: null,
+            userHasAuthenticated: null  // Init to null then true/false after submit
         }
         this.handleClientSelection = this.handleClientSelection.bind(this);
         this.handleClientDOB = this.handleClientDOB.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.setNewClients = this.setNewClients.bind(this);
+        this.handleAuthUser = this.handleAuthUser.bind(this);
     }
 
     componentDidMount() {
@@ -47,16 +49,25 @@ class ClientAuthentication extends Component {
         });
     }
 
+    handleAuthUser(payload) {
+        if(payload.authenticated === false)
+            this.setState({
+                userHasAuthenticated: false
+            })
+        this.props.onAuthentication(payload);
+    }
+
     onSubmit(e) {
         if(this.state.nameSelected === undefined)
             this.setState({ hasSelected: false })
-
+        
         let payload = {
             name : this.state.nameSelected,
             dob  : this.state.dob,
             authenticated : false
         }
-        authUser(payload, this.props.onAuthentication);
+        payload = authUser(payload, this.handleAuthUser);
+
     }
 
     render() {
@@ -65,7 +76,7 @@ class ClientAuthentication extends Component {
                 <div id="Centralized-In-Block" className="Authenticatin-Div">
                 <center>
                     {this.state.clients != null &&
-                        <h2>Enter Your Name:</h2>
+                        <h2>Enter Your Name</h2>
                     }
                     <ClientListTypeahead 
                         clientList={this.state.clients} 
@@ -74,7 +85,15 @@ class ClientAuthentication extends Component {
                     {
                         this.state.hasSelected
                             ?   <div id="Top-Padding">
-                                    <DOB defaultDate={"2000-01-01"} onValidDOB={this.handleClientDOB}/>
+                                    <h5>Enter your DOB</h5>
+                                    <span>
+                                        <DOB defaultDate={"2000-01-01"} onValidDOB={this.handleClientDOB}/>
+                                        {
+                                            (this.state.userHasAuthenticated !== null && this.state.userHasAuthenticated === false)
+                                                ?   <span className="Failed-Authentication-Div" color="red">Failed Authentication...</span>
+                                                :   null
+                                        }
+                                    </span>
                                 </div>
                             : null
                     }
