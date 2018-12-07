@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ClientAuthentication from '../ClientAuthentication/ClientAuthentication.jsx';
 import ContinueToAccountQuestion from '../ClientAuthentication/ContinueToAccount.jsx';
 import { getClients, checkIn } from './ClientCheckInVirtualController';
-import DateError from './DateError.jsx'
-import PasswordError from './PasswordError.jsx'
 
 class ClientCheckIn extends Component {
     constructor(props) {
@@ -80,8 +78,6 @@ class ClientCheckIn extends Component {
                     ?
                         <div>
                             <ClientAuthentication clients={this.state.clients} onAuthentication={this.onAuthentication}/>
-                            <DateError showError={this.state.invalidDate}/>
-                            <PasswordError showError={this.state.invalidPassword}/>
                         </div>
                     :
                         <div id="Centralized-In-Page">

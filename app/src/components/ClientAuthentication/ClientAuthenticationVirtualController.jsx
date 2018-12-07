@@ -29,6 +29,9 @@ async function authUser(payload, callback) {
                     // callback
                     callback(payload);
                 });
+            } else {
+                payload.authenticated = false;
+                callback(payload)
             }
         }).catch(error => {
             callback(payload);
