@@ -3,6 +3,7 @@ import addClients from './ClientRegistrationVirtualController';
 import { Button }  from 'react-bootstrap';
 import { verifyName } from '../Shared/Utils.js'
 import DOB from '../Shared/DobInput.jsx';
+import { Redirect } from 'react-router-dom';
 
 class ClientRegistration extends Component {
     constructor (props) {
@@ -15,6 +16,7 @@ class ClientRegistration extends Component {
             dob: null,
             dobCompleted: false,
             isNameValid: true,
+            successfullNewUser: false
         }
 
         // bind all functions
@@ -25,6 +27,7 @@ class ClientRegistration extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDOBInput = this.handleDOBInput.bind(this);
         this.timeFormatter = this.timeFormatter.bind(this);
+        this.confirmNewUser = this.confirmNewUser.bind(this);
     }
 
     handleChange (event) {
@@ -73,9 +76,7 @@ class ClientRegistration extends Component {
 
     confirmNewUser(query_result){
         if(query_result.error === "none"){
-            alert('Successfully added User')
-            window.location='/MedicalQuestionnaire';
-
+            this.setState({ successfullNewUser: true })
         }
         else if(query_result.error === "DBFail"){
             alert('Database Error')
@@ -119,18 +120,32 @@ class ClientRegistration extends Component {
     render() {
       return (
         <div className="ClientRegistration">
-            <form id="form1" onSubmit={this.handleSubmit}>
-                First Name:
+            {   (this.state.successfullNewUser)
+                ?
+                    <div>  
+                        <Redirect to={{
+                                pathname: '/MedicalQuestionnaire',
+                                state: {
+                                    firstName: this.state.firstName,
+                                    lastName: this.state.lastName,
+                                    dob: this.state.dob,
+                                },
+                            }}>
+                        </Redirect>
+                    </div>
+                :
+                <form id="form1" onSubmit={this.handleSubmit}>
+                First Name:&nbsp;
                 <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}
-                    id="NewUserFirst"/>
+                    id="Registration-Input"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
                 <br/>
 
-                Last Name:
+                Last Name:&nbsp;
                 <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}
-                    id="NewUserLast"/>
+                    id="Registration-Input"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
@@ -149,8 +164,9 @@ class ClientRegistration extends Component {
                         </Button>
                         : null
                 }
-
-            </form>
+            </form>       
+                
+            }
         </div>
       );
     }

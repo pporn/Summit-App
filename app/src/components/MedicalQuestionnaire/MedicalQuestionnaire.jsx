@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { setMedicalQuestionnaire } from './MedicalQuestionnaireVirtualController'
 import { Redirect } from 'react-router-dom';
+import DOB from '../Shared/DobInput.jsx';
 
 class MedicalQuestionnaire extends Component {
     constructor (props) {
@@ -8,9 +9,9 @@ class MedicalQuestionnaire extends Component {
 
         // state info
         this.state = {
-            firstName: '',
-            lastName: '',
-            dob: '',
+            firstName: this.props.location.state.firstName,
+            lastName: this.props.location.state.lastName,
+            dob: this.props.location.state.dob,
             hasIllness: '',
             takingMedications: '',
             lastCheckup: '',
@@ -20,6 +21,7 @@ class MedicalQuestionnaire extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onFinish = this.onFinish.bind(this);
+        this.handleDob = this.handleDob.bind(this);
     }
 
     handleChange ({ target }) {
@@ -30,9 +32,11 @@ class MedicalQuestionnaire extends Component {
 
     handleSubmit (event) {
         event.preventDefault();
-        console.log(this.state);
-
         setMedicalQuestionnaire(this.state, this.onFinish);
+    }
+
+    handleDob(dob) {
+        this.setState({ dob: dob });
     }
 
     onFinish(isSuccessful) {
@@ -45,29 +49,19 @@ class MedicalQuestionnaire extends Component {
       return (
         <div>
             <form onSubmit={this.handleSubmit}>
-                First Name <br/>
-                <input name = "firstName" type="textarea" value={this.state.firstName} onChange={this.handleChange} />
-                <br/>
-
-                Last Name <br/>
-                <input name = "lastName" type="textarea" value={this.state.lastName} onChange={this.handleChange} />
-                <br/>
-
-                Date of Birth <br/>
-                <input name = "dob" type="date" value={this.state.dob} onChange={this.handleChange}/>
-                <br/>
-
                 Are you currently being or have been in the past year treated for a medical condition?<br/>
                 <textarea name = "hasIllness" type="textarea" rows="4" value={this.state.hasIllness} onChange={this.handleChange}
                     id="MedQuesConditions"/>
                 <br/>
 
                 Are you currently taking any medications?<br/>
-                <textarea name = "takingMedications" type="textarea" value={this.state.takingMedications} onChange={this.handleChange}/>
+                <textarea name = "takingMedications" type="textarea" value={this.state.takingMedications} onChange={this.handleChange}
+                    id="MedQuesConditions"/>
                 <br/>
 
                 When was your last checkup? <br/>
-                <input name = "lastCheckup" type="date" value={this.state.lastCheckup} onChange={this.handleChange}/>
+                <DOB onValidDOB={this.handleDob}/>
+
                 <br/>
 
                 <input type="submit" value="Submit"/>
