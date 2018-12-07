@@ -22,6 +22,7 @@ import EmployeeAuthentication from './components/EmployeeAuthentication/Employee
 import UserManagement from './components/UserManagement/UserManagementContainer.jsx';
 import RefillPunchCards from './components/RefillPunchCards/RefillPunchCardsContainer.jsx'
 import ViewUserInfo from './components/ViewUserInfo/ViewUserInfoContainer.jsx'
+import ManageAlert from './components/ManageAlert/ManageAlertContainer.jsx'
 
 class App extends Component {
   render() {
@@ -48,6 +49,7 @@ class App extends Component {
           <Route path='/HowToUseApp' component={HowToUseApp}/>
           <Route path='/RefillPunchCards' component={RefillPunchCards}/>
           <Route path='/ViewUserInfo' component={ViewUserInfo}/>
+          <Route path='/ManageAlert' component={ManageAlert}/>
         </Switch>
       </div>
     );
