@@ -1,5 +1,3 @@
-import { queryBuilder } from '../Shared/Utils.js';
-
 function getAllAlerts(callback) {
     const api = 'https://us-central1-summit-app-6f288.cloudfunctions.net/getAllAlerts';
 

@@ -16,6 +16,10 @@ class EmployeePageContainer extends Component {
                             <Button bsStyle='primary'>Clock Out</Button>
                         </Link>
 
+                        <Link to='/EmployeeClockInAndOut' id='Centralized-In-Block'>
+                            <Button bsStyle='primary'>View Clock In and Out</Button>
+                        </Link>
+
                         <Link to='/AlertManagement' id='Centralized-In-Block'>
                             <Button bsStyle='primary'>Alert Management</Button>
                         </Link>
@@ -23,7 +27,7 @@ class EmployeePageContainer extends Component {
                         <Link to='/UserManagement' id='Centralized-In-Block'>
                             <Button bsStyle='primary'>User Management</Button>
                         </Link>
-                    </ButtonGroup>
+                   </ButtonGroup>
                 </ButtonToolbar>
             </div>
         )
