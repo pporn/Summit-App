@@ -25,6 +25,7 @@ import ViewUserInfo from './components/ViewUserInfo/ViewUserInfoContainer.jsx'
 import ManageAlert from './components/ManageAlert/ManageAlertContainer.jsx'
 import EmployeeClockIn from  './components/EmployeeClockIn/EmployeeClockInContainer.jsx'
 import EmployeeClockOut from  './components/EmployeeClockOut/EmployeeClockOutContainer.jsx'
+import EmployeeClockInAndOut from  './components/EmployeeClockInAndOut/EmployeeClockInAndOutContainer.jsx'
 
 class App extends Component {
   render() {
@@ -54,6 +55,7 @@ class App extends Component {
           <Route path='/ManageAlert' component={ManageAlert}/>
           <Route path='/EmployeeClockIn' component={EmployeeClockIn}/>
           <Route path='/EmployeeClockOut' component={EmployeeClockOut}/>
+          <Route path='/EmployeeClockInAndOut' component={EmployeeClockInAndOut}/>
         </Switch>
       </div>
     );
