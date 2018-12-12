@@ -31,7 +31,6 @@ class DobInput extends Component {
     }
 
     render() {
-        console.log('here');
         return(
             <div>
                 <input 

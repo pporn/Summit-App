@@ -24,7 +24,7 @@ function setMedicalQuestionnaire(payload, onFinish) {
 
     // delete unused state props
     delete payload['isSubmitted'];
-
+    console.log(payload);
     getUserId(payload)
         .then((res) => {
             if(res.status === 200) {
