@@ -137,7 +137,7 @@ class ClientRegistration extends Component {
                 <form id="form1" onSubmit={this.handleSubmit}>
                 First Name:&nbsp;
                 <input name="firstName" type="text" value={this.state.firstName} onChange={this.handleChange}
-                    id="Registration-Input"/>
+                    id="User-Input"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }
@@ -145,7 +145,7 @@ class ClientRegistration extends Component {
 
                 Last Name:&nbsp;
                 <input name="lastName" type="text" value={this.state.lastName} onChange={this.handleChange}
-                    id="Registration-Input"/>
+                    id="User-Input"/>
                 {!this.state.isNameValid &&
                     <span style={{color:'red'}}> Invalid Name </span>
                 }

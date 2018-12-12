@@ -54,14 +54,12 @@ class EmployeeAuthenticationContainer extends Component {
         return(
             <div>
                 <form id='form1' onSubmit={this.handleSubmit}>
-                    Email:
-                    <input name='email' value={this.state.email} onChange={this.handleChange} />
-                    <br />
-
-                    Password:
-                    <input type='password' name='password' value={this.state.password} onChange={this.handleChange} />
-                    <br />
-
+                    Email:&nbsp;
+                    <input id="User-Input" name='email' value={this.state.email} onChange={this.handleChange}/>
+                    <br/>
+                    Password:&nbsp;
+                    <input id="User-Input" type='password' name='password' value={this.state.password} onChange={this.handleChange} />
+                    <br/>
                     <Button
                         bsStyle='primary'
                         type='submit'
