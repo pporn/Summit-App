@@ -37,7 +37,7 @@ class EmployeeClockInContainer extends Component {
         if(isSuccess) {
             alert('Successfully clocked out');
         } else {
-            alert('error: ' + payload.error);
+            alert(payload.error);
         }
 
         return;
