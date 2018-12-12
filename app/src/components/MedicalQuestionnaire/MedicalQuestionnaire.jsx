@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { setMedicalQuestionnaire } from './MedicalQuestionnaireVirtualController'
+import setMedicalQuestionnaire from './MedicalQuestionnaireVirtualController'
 import { Redirect } from 'react-router-dom';
 import DOB from '../Shared/DobInput.jsx';
 
@@ -9,9 +9,7 @@ class MedicalQuestionnaire extends Component {
 
         // state info
         this.state = {
-            firstName: this.props.location.state.firstName,
-            lastName: this.props.location.state.lastName,
-            dob: this.props.location.state.dob,
+            userId: this.props.location.state.userId,
             hasIllness: '',
             takingMedications: '',
             lastCheckup: '',

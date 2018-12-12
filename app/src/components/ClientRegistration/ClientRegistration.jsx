@@ -68,23 +68,20 @@ class ClientRegistration extends Component {
 
         if(fName === "" || lName === ""){
             return {validName: false}
-        }
-        else{
+        } else {
             return {firstName:fName, lastName:lName, validName: true}
         }
     }
 
-    confirmNewUser(query_result){
-        if(query_result.error === "none"){
-            this.setState({ successfullNewUser: true })
+    confirmNewUser(isSuccessful, payload){
+        if(isSuccessful) {
+            this.setState({
+                successfullNewUser: true,
+                userId: payload.userId,
+            });
+        } else {
+            alert(payload.error);
         }
-        else if(query_result.error === "DBFail"){
-            alert('Database Error')
-        }
-        else if(query_result.error === "QueryFail"){
-            alert('Query Error')
-        }
-
     }
 
     timeFormatter = (time) => {
@@ -116,19 +113,16 @@ class ClientRegistration extends Component {
         });
     }
 
-
     render() {
       return (
         <div className="ClientRegistration">
             {   (this.state.successfullNewUser)
                 ?
-                    <div>  
+                    <div>
                         <Redirect to={{
                                 pathname: '/MedicalQuestionnaire',
                                 state: {
-                                    firstName: this.state.firstName,
-                                    lastName: this.state.lastName,
-                                    dob: this.state.dob,
+                                    userId: this.state.userId,
                                 },
                             }}>
                         </Redirect>
@@ -164,8 +158,8 @@ class ClientRegistration extends Component {
                         </Button>
                         : null
                 }
-            </form>       
-                
+            </form>
+
             }
         </div>
       );
