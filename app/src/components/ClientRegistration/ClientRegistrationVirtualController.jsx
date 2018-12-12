@@ -19,15 +19,16 @@ function addClients(payload, callback){
         fetch(query).then(res => {
             // return true upon successful call
             if(res.status === 200) {
-                payload.authenticated = true;
+                res.json().then(({ message }) => {
+                    callback(true, { userId: message })
+                });
             }
-            callback({error: "none"})
            // callback({});
         }).catch(error => {
-            callback({error: "DBFail"});
+            callback(false, { error: error });
         });
     } catch (e) {
-        callback({error: "QueryFail"});
+        callback(false, { error: e });
     }
 }
 

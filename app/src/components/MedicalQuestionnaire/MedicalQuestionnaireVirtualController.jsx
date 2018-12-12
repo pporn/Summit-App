@@ -1,65 +1,30 @@
-import { queryBuilder } from '../Shared/Utils';
-
-function getUserId(
-    {
-        firstName,
-        lastName,
-        dob,
-    },
-    onFinish
-){
-    let api = 'https://us-central1-summit-app-6f288.cloudfunctions.net/getUserId?';
-    api = queryBuilder(api)
-            .param('first_name').val(firstName)
-            .param('last_name').val(lastName)
-            .param('dob').val(dob)
-            .getUrl();
-
-    // return response
-    return fetch(api).then((res) => res);
-}
-
 function setMedicalQuestionnaire(payload, onFinish) {
     const api = 'https://us-central1-summit-app-6f288.cloudfunctions.net/setMedInfo';
 
+    const { userId } = payload;
     // delete unused state props
     delete payload['isSubmitted'];
-    console.log(payload);
-    getUserId(payload)
-        .then((res) => {
-            if(res.status === 200) {
-                // convert to json
-                res = res.json();
+    delete payload['userId'];
+    // post data
+    const data = {};
+    data['user_id'] = userId;
+    data['val'] = payload;
 
-                // set med info
-                res.then(({ id }) => {
-                    // post data
-                    const data = {};
-                    data['user_id'] = id;
-                    data['val'] = payload;
+    console.log(data);
 
-                    console.log(data);
-
-                    fetch(api, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    }).then((res) => {
-                        if(res.status === 200) {
-                            onFinish(true);
-                        } else {
-                            onFinish(false);
-                        }
-                    })
-                });
-            }
-            // if user does not exist
-            else {
-                onFinish(false);
-            }
-        });
+    fetch(api, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then((res) => {
+        if(res.status === 200) {
+            onFinish(true);
+        } else {
+            onFinish(false);
+        }
+    });
 };
 
-export { setMedicalQuestionnaire };
+export default setMedicalQuestionnaire;
