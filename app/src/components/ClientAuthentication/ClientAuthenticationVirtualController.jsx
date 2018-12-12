@@ -52,14 +52,14 @@ function getClients(setNewClients) {
                 res.json().then((clients) => {
                     setNewClients(clients);
 
-                    // return after set new clients
-                    return;
                 });
+                // return after set new clients
+                return;
+            } else {
+                // if status is not 200 set clients to null
+                setNewClients(null);
+                return;
             }
-
-            // if status is not 200 set clients to null
-            setNewClients(null);
-            return;
         });
     } catch(e) {
         setNewClients(null);

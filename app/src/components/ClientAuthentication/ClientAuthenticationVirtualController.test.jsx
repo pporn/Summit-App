@@ -1,4 +1,4 @@
-import { authUser } from './ClientAuthenticationVirtualController';
+import { authUser, getClients } from './ClientAuthenticationVirtualController';
 
 const correctPayload = {
     name: 'Chen Yang',
@@ -32,4 +32,16 @@ describe('authUser', () => {
     });
 });
 
+describe('getClientNames', () => {
+    it('Try to fetch client names', (done) => {
+        const callback = (data) => {
+            console.log(data);
+
+            expect(data !== null).toBe(true);
+            done();
+        };
+
+        getClients(callback);
+    });
+});
 
