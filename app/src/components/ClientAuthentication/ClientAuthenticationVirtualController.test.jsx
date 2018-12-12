@@ -35,8 +35,6 @@ describe('authUser', () => {
 describe('getClientNames', () => {
     it('Try to fetch client names', (done) => {
         const callback = (data) => {
-            console.log(data);
-
             expect(data !== null).toBe(true);
             done();
         };
